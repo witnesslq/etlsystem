@@ -1,0 +1,59 @@
+﻿/*面包屑组件开始*/
+.m-crumb { font-size: 12px; background-color: #eef4f6; height: 30px; line-height: 30px; padding-left: 10px; font-weight: normal; border-bottom: 1px solid #dbe3e6; }
+.m-crumb i { position: relative; top: -1px; display: inline-block; vertical-align: middle; margin: 0 2px; width: 5px; height: 8px; background: url(../imgs/crumb_arrow.png) center center no-repeat; }
+/*面包屑组件结束*/
+/*底部备案开始*/
+.m-footer{padding-left:10px; position:fixed;left:0;bottom:0;height:30px;line-height:30px;background-color:#eef4f6;width:100%;border-top:1px solid #dbe3e6;}
+/*底部备案结束*/
+/*下拉弹窗选择组件开始*/
+.m-select{display:inline-block;vertical-align:top;position:relative;height:33px;border-radius:2px;border:1px solid #aaa; background:url(../imgs/bluesanjiao.png) 110px 13px no-repeat #fff;width:130px;}
+.m-select span{color:#000;width:100%;height:100%;display:inline-block;line-height:33px;padding-left:20px;}
+.m-select ul{position:absolute;top:32px;left:0;width:100%;display:none;}
+.m-select li{height:33px;line-height:33px;color:#000;padding-left:20px; background-color:#fff;border:1px solid #e5e4e4;border-top:none; cursor:pointer;}
+.m-select li:first-child{border-top:none;border-top:1px solid #e5e4e4;}
+.m-select li:hover{color:#fff;background-color:#2a71cb;border-color:#2a71cb;}
+/*下拉弹窗选择组件结束*/
+/*分页开始*/
+.m-pagenav { overflow: hidden; font-size: 12px; margin-top: 15px;padding:0 10px; }
+.m-pagenav .sum { float: left; margin-top: 4px; }
+.m-pagenav .sum > span { margin: 0 5px; }
+.m-pagenav .sum > select { margin: 0 5px; }
+.m-pagenav .pagination { float: right;}
+.m-pagenav .pagination ul { float: left; margin-right: 5px; }
+.m-pagenav .pagination li { float: left; list-style: none; margin: 0 3px; }
+.m-pagenav .pagination li a { display: block; height: 26px; width: 26px; line-height: 26px; text-align: center; cursor: pointer; border-radius: 5px; }
+.m-pagenav .pagination li:hover a { background-color: #eee; }
+.m-pagenav .pagination li.active a, .m-pagenav .pagination li.active:hover a { background-color: #077eed; color: #fff; }
+.m-pagenav .pagination li.disabled a, .m-pagenav .pagination li.disabled a:focus, .m-pagenav .pagination li.disabled a:hover { cursor: not-allowed;}
+.m-pagenav .pagination li.disabled:hover a { background-color:#fff; }
+.m-pagenav .pagination .inputbox { float: left; }
+.m-pagenav .pagination .inputbox input { display: inline-block; width: 26px; height: 26px; text-align: center; margin-right: 5px; }
+.m-pagenav .pagination .inputbox a { cursor: pointer; display: inline-block; height: 26px; width: 26px; text-align: center; line-height: 26px; margin-left: 5px; color: #077eed; }
+/*分页结束*/
+/*表格公共样式开始*/
+.grid_hover { background-color: #f9f9f9; }
+.ev_material { background-color: #FFFFFF; }
+div.gridbox_material.gridbox table.obj tr td { color: #555; }
+/*表头*/
+div.gridbox_material.gridbox table.hdr td { background-color: #eef3f6; color: #222; font-weight: 600; font-size: 12px; text-align: center;border:1px solid #ddd; }
+div.gridbox_material.gridbox table.obj.row20px tr td{border-right:1px solid #ddd;height:36px;line-height:36px;font-size:12px;}
+/*表格内操作按钮*/
+.row-event span { cursor: pointer; display: inline-block; *display: inline; *zoom: 1; color: #077eed; padding: 0px 5px; height: 40px; line-height: 40px; margin: 0px 8px; }
+/*表格样式结束*/
+/*按钮样式*/
+.m-button { color: #fff; font-weight: 300; font-size: 16px; line-height: 35px; height: 35px; padding: 0 10px; min-width: 100px; text-decoration: none; text-align: center; display: inline-block; appearance: none; -moz-appearance: none; -webkit-appearance: none; cursor: pointer; border: none; border-radius: 3px; }
+.m-button-blue { background: #84DBFF; }
+.m-button-blue-b { background: #077EED; }
+.m-button-blue-d { background: #09B3FA; }
+.m-button-orange { background: #FF6508; }
+.m-button-green { background: #3BBA98; }
+.m-button-grey { background: #D5D5D5; }
+.m-button-grey-d { background: #A8A8A8; }
+.m-button-red { background: #FF7B7B; }
+
+/*全选input样式*/
+#checkInput{
+    width:15px;height:15px;
+}
+/*表格样式结束*/
+
