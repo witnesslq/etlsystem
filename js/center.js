@@ -54,7 +54,7 @@
                 <dl class="task-manger"><dt>任务管理<i></i></dt><dd hrefurl="html/index/index.html">任务管理</dd></dl>\
                 <dl class="task-dispatch"><dt>任务调度<i></i></dt><dd hrefurl="html/index/index.html">任务调度</dd></dl>\
                 <dl class="task-run"><dt>任务运行<i></i></dt><dd hrefurl="html/index/index.html">运行中的任务</dd><dd hrefurl="html/index/index.html">任务历史</dd></dl>\
-                <dl class="system-manger"><dt>系统管理<i></i></dt><dd hrefurl="html/index/index.html">角色管理</dd><dd hrefurl="html/index/index.html">用户管理</dd><dd hrefurl="html/index/index.html">权限管理</dd><dd hrefurl="html/index/index.html">个人信息</dd></dl>\
+                <dl class="system-manger"><dt>系统管理<i></i></dt><dd hrefurl="html/index/index.html">角色管理</dd><dd hrefurl="html/index/index.html">用户管理</dd><dd hrefurl="html/index/index.html">权限管理</dd><dd hrefurl="html/system/userinfo.html">个人信息</dd></dl>\
                 <div class="mouse-menu"></div>\
             </div>');
     //初始化右侧中间主体内容
