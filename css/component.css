@@ -31,29 +31,246 @@
 .m-pagenav .pagination .inputbox a { cursor: pointer; display: inline-block; height: 26px; width: 26px; text-align: center; line-height: 26px; margin-left: 5px; color: #077eed; }
 /*分页结束*/
 /*表格公共样式开始*/
-.grid_hover { background-color: #f9f9f9; }
-.ev_material { background-color: #FFFFFF; }
-div.gridbox_material.gridbox table.obj tr td { color: #555; }
+.grid_hover {
+    background-color: #FBFBFB;
+}
+.ev_material {
+    background-color: #FFFFFF;
+}
+div.gridbox_material.gridbox .odd_material {
+    background-color: #F5F5F5;
+}
+div.gridbox_material.gridbox table.obj tr td {
+    color: #555;
+}
 /*表头*/
-div.gridbox_material.gridbox table.hdr td { background-color: #eef3f6; color: #222; font-weight: 600; font-size: 12px; text-align: center;border:1px solid #ddd; }
-div.gridbox_material.gridbox table.obj.row20px tr td{border-right:1px solid #ddd;height:36px;line-height:36px;font-size:12px;}
+ div.gridbox_material.gridbox table.hdr td {
+    background-color: #f5f5f5;
+    color: #222;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+}
 /*表格内操作按钮*/
-.row-event span { cursor: pointer; display: inline-block; *display: inline; *zoom: 1; color: #077eed; padding: 0px 5px; height: 40px; line-height: 40px; margin: 0px 8px; }
+ .row-event span {
+    cursor: pointer;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    color: #077eed;
+    padding: 0px 5px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0px 8px;
+}
 /*表格样式结束*/
+/*边界外间距*/
+.mbottom_20 {
+    margin-bottom:20px;
+}
+.mtop_20 {
+    margin-top:20px;
+}
+.mright_20 {
+    margin-right:20px;
+}
+.space_hx_20 {
+    height:20px;
+    background:none;
+    clear:both;
+}
 /*按钮样式*/
-.m-button { color: #fff; font-weight: 300; font-size: 16px; line-height: 35px; height: 35px; padding: 0 10px; min-width: 100px; text-decoration: none; text-align: center; display: inline-block; appearance: none; -moz-appearance: none; -webkit-appearance: none; cursor: pointer; border: none; border-radius: 3px; }
-.m-button-blue { background: #84DBFF; }
-.m-button-blue-b { background: #077EED; }
-.m-button-blue-d { background: #09B3FA; }
-.m-button-orange { background: #FF6508; }
-.m-button-green { background: #3BBA98; }
-.m-button-grey { background: #D5D5D5; }
-.m-button-grey-d { background: #A8A8A8; }
-.m-button-red { background: #FF7B7B; }
-
+.m-button {
+    font-family:"微软雅黑";
+	color:#fff;
+	font-weight:300;
+	font-size:16px;
+	line-height:35px;
+	height:35px;
+	padding:0 10px;
+	min-width:100px;
+	text-align:center;
+	display:inline-block;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	cursor:pointer;
+	border:none;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    background-color: #dddddd;    
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
+}
+.m-button-query {
+    background: #DCDBDB;
+    color:#000;
+}
+.m-button-submit {
+    background: #1E79B1;
+}
+.m-button-submit:active{
+    background:#1A6795;
+    box-shadow:inset 0px 2px 3px 2px #165A83;
+}
+.m-button-add {
+    background: #3BBA98;
+}
+.m-button-add:active{
+    background-color:#329C80;
+    box-shadow:inset 0px 2px 3px 2px #297E67;
+}
+.m-button-delete {
+    background: #F32F02;
+}
+.m-button-delete:active{
+    background-color:#D72702;
+    box-shadow:inset 0px 2px 3px 2px #BC2201;
+}
+button.m-button {
+    border:1px solid #C9C9C9;
+}
+/*表单输入框和选择框*/
+.form_input {
+    width:100px;
+    display:block;
+	height:34px;
+	padding:6px 12px;
+	font-size:14px;
+	line-height:1.42857143;
+	color:#555;
+	background-color:#fff;
+	background-image:none;
+	border:1px solid #ccc;
+	border-radius:4px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s
+}
+.form_input:focus {
+	border-color:#66afe9;
+	outline:0;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+	box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
 /*全选input样式*/
 #checkInput{
     width:15px;height:15px;
 }
 /*表格样式结束*/
-
+/*表格*/
+.product_box {
+    width:97%;
+    margin:20px auto;/*表格页面白色盒子底部间隙*/
+    padding: 20px;/*矿石页面的表格底部太高修改*/
+    background-color:#fff;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    -webkit-box-shadow:0px 1px 2px 0px #DDD;
+    -moz-box-shadow:0px 1px 2px 0px #DDD;
+    box-shadow:0px 1px 2px 0px #DDD;
+    border:1px solid #DDD;
+}
+.product_box .steel_date {
+    margin:0px auto;
+    padding-bottom:20px;
+}
+/*系统管理*/
+.grid_form {
+	font-size:16px;
+	padding:30px 0 20px;
+}
+.grid_form li {
+	padding-bottom:20px;
+	position:relative;
+}
+.grid_form li i {
+	position:absolute;
+	left:160px;
+	color:red;
+	font-size:12px;
+	bottom:3px;
+	font-style:normal;
+}
+.grid_form li i.hide{
+    display:none;
+}
+.grid_form li span {
+	float:left;
+	width:160px;
+	padding-right:15px;
+	text-align:right;
+	line-height:42px;
+}
+.grid_form li input{
+	width:300px;
+	float:left;
+    height:42px;
+}
+.grid_form .input_disable { 
+    background: #fff; 
+    color:#666;
+    width: 300px;
+    float: left;
+    height: 42px;
+    line-height:42px;
+}
+.grid_form .form_tip { 
+    float: none; 
+    max-width: 80%; 
+    padding-left: 100px;
+}
+.grid_form .form_tip {
+	float:left;
+	max-width:53%;
+	color:#666666;
+	margin-left:2%;
+	padding:7px 0;
+}
+.grid_form .form_tip em {
+    font-style: normal;
+    color: #f00;
+    width: 20px;
+    text-align: left;
+    display: inline-block;
+}
+.form_button{ 
+    text-align: left; 
+    padding-left:200px;
+    padding-bottom:20px;
+}
+/*内置dhtmlx样式重置*/
+.dhtmlx-success div{
+    background-color:#32D16C;
+    color:#fff;
+    margin:0;
+    padding: 16px 9px 16px 18px;
+}
+.dhtmlx_popup_text,
+.dhtmlx_popup_button ,
+.dhtmlx-alert .dhtmlx_popup_title, .dhtmlx-confirm .dhtmlx_popup_title {
+    font-family: '微软雅黑';
+    font-size:14px;
+}
+.dhtmlx-alert .dhtmlx_popup_title, .dhtmlx-confirm .dhtmlx_popup_title {
+    background:#F5F5F5;
+    border:1px solid #ddd;
+}
+.dhtmlx_popup_button {
+    background:#22a1bc;
+    border: 1px solid #22a1bc;
+    box-shadow: none;
+    color: white;
+    line-height:28px;
+    height:28px;
+    border-radius: 4px;
+}
+.dhtmlx_popup_button:active{
+    background:#1A7A8E;
+}
