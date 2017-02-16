@@ -1,12 +1,12 @@
 ﻿var myGrid;
 $(function () {
     myGrid = new dhtmlXGridObject('gridbox');
-    myGrid.setHeader("序号,用户名,姓名,手机号,角色,状态,操作")
-    myGrid.setColumnIds("ordernum,username,name,phoneNumber,role,status,status");
-    myGrid.setColTypes("cntr,ro,ro,ro,ro,ro,button");
-    myGrid.setInitWidths("50,180,130,150,140,*,200");
-    myGrid.setColAlign("center,center,center,center,center,center,center");
-    myGrid.enableTooltips("false,true,true,true,true,true,false");
+    myGrid.setHeader("序号,任务名称,任务调度名称,用户,首次调度时间,下次调度时间,重复时间间隔,操作")
+    myGrid.setColumnIds(",name,controlname,user,begingtime,endtime,duration,id");
+    myGrid.setColTypes("cntr,ro,ro,ro,ro,ro,ro,button");
+    myGrid.setInitWidths("50,*,130,70,155,155,120,180");
+    myGrid.setColAlign("center,center,center,center,center,center,center,center");
+    myGrid.enableTooltips("false,true,true,true,true,true,true,false");
     myGrid.enableResizing("false");
     myGrid.enableKeyboardSupport(false);
     myGrid.enableAutoHeight(true);
@@ -19,47 +19,15 @@ $(function () {
         return false;
     });
     if (GLOBAL_DEBUG) {
-        myGrid.parse(GLOBAL_JSON.user_list.data.users, function () {
-            myGrid.forEachRow(function (id) {
-                var status_cell = myGrid.cellById(id, 5);
-                var status_value = status_cell.getValue();
-                if (status_value == 'Enable') {
-                    status_cell.setValue('<span style="color:#54c3a5">启用</span>');
-                } else {
-                    status_cell.setValue('<span style="color:#ff576f">禁用</span>');
-                }
-                var role_cell = myGrid.cellById(id, 4);
-                var role_value = role_cell.getValue();
-                if (role_value == 'Administrator') {
-                    role_cell.setValue('管理员');
-                } else if (role_value == 'User') {
-                    role_cell.setValue('普通用户');
-                }
-            });
-        }, "js");
+        var data = GLOBAL_JSON.task_control.data.data;
+        myGrid.parse(data, "js");
     } else {
         _ajax({
-            url: GLOBAL_AJAX_URL.user_list,
+            url: GLOBAL_AJAX_URL.task_control,
+            data:{},
             success: function (res) {
                 if (res.status) {
-                    myGrid.parse(res.data, function () {
-                        myGrid.forEachRow(function (id) {
-                            var status_cell = myGrid.cellById(id, 5);
-                            var status_value = status_cell.getValue();
-                            if (status_value == 'Enable') {
-                                status_cell.setValue('<span style="color:#54c3a5">启用</span>');
-                            } else {
-                                status_cell.setValue('<span style="color:#ff576f">禁用</span>');
-                            }
-                            var role_cell = myGrid.cellById(id, 4);
-                            var role_value = role_cell.getValue();
-                            if (role_value == 'Administrator') {
-                                role_cell.setValue('管理员');
-                            } else if (role_value == 'User') {
-                                role_cell.setValue('普通用户');
-                            }
-                        });
-                    }, "js");
+                    myGrid.parse(res.data, "js");
                 } else {
                     top.dhtmlx.alert({
                         text: res.messages,
@@ -70,17 +38,25 @@ $(function () {
             }
         });
     }
-    //添加用户
-    $('.btn_add').on('click',  function () {
+    //按钮事件
+    $('#btn_search').on('click', function () {
+        var data = {};
+            data.name = $('#taskName').val();
+        //ajax加载数据，函数
+        window.location.reload(true);
+    });
+
+    //添加调度
+    $('.btn_add').on('click', function () {
         top.creatPop({
-            caption: '添加用户',
-            width: 680,
-            height: 510,
-            url: 'html/common/useraddpop.html'
+            caption: '添加调度',
+            width: 630,
+            height: 480,
+            url: 'html/common/control_add.html'
         });
         top.myPop.callback = function (param) {
             if (GLOBAL_DEBUG) {
-                window.location.reload(true);                
+                window.location.reload(true);
             } else {
                 _ajax({
                     url: GLOBAL_AJAX_URL.user_add,
@@ -100,29 +76,27 @@ $(function () {
             }
         }
     });
-    
 })
-    //用户编辑
-    function userEditPop(rid) {
+    
+    //修改调度
+    function controlEdit(rid) {
         top.creatPop({
-            caption: '修改用户',
-            width: 670,
-            height: 510,
-            url: 'html/common/usereditpop.html'
+            caption: '修改调度',
+            width: 630,
+            height: 480,
+            url: 'html/common/control_edit.html'
         });
         top.myPop.passdata = {
             "id": rid,
-            "username": myGrid.cellById(rid, 1).getValue(),
             "name": myGrid.cellById(rid, 2).getValue(),
-            "phoneNumber": myGrid.cellById(rid, 3).getValue(),
-            "role": myGrid.cellById(rid, 4).getValue()
+            "starttime": myGrid.cellById(rid, 4).getValue()
         };
         top.myPop.callback = function (param) {
             if (GLOBAL_DEBUG) {
                 window.location.reload(true);
             } else {
                 _ajax({
-                    url: GLOBAL_AJAX_URL.user_edit,
+                    url: GLOBAL_AJAX_URL.control_edit,
                     data: param,
                     success: function (res) {
                         if (res.status) {
@@ -139,13 +113,13 @@ $(function () {
             }
         }
     };
-    //用户删除
-    function userDel(id) {
+    //调度删除
+    function controlDel(id) {
         top.creatPop({
-            caption: '删除用户',
+            caption: '删除调度',
             width: 360,
             height: 234,
-            title: '您确定要删除这些用户吗？删除后将无法找回',
+            title: '您确定要删除该调度吗？删除后将无法找回',
             url: 'html/common/delpop.html'
         });
         top.myPop.callback = function () {
@@ -153,7 +127,7 @@ $(function () {
                 window.location.reload(true);
             } else {
                 _ajax({
-                    url: GLOBAL_AJAX_URL.user_del,
+                    url: GLOBAL_AJAX_URL.control_del,
                     data: { id: id },
                     success: function (res) {
                         if (res.status) {
@@ -170,21 +144,20 @@ $(function () {
             }
         }
     }
-    //更改用户状态
-    function changeState(user_id) {
+    //手动执行
+    function controlHand(id) {
         top.creatPop({
-            caption: '更改用户状态',
-            width: 360,
-            height: 234,
-            title: '您确定要更改此用户状态',
-            url: 'html/common/delpop.html'
+            caption: '手动执行调度',
+            width: 630,
+            height: 480,
+            url: 'html/common/control_hand.html'
         });
         top.myPop.callback = function () {
             if (GLOBAL_DEBUG) {
                 window.location.reload(true);
             } else {
                 _ajax({
-                    url: GLOBAL_AJAX_URL.user_status_edit,
+                    url: GLOBAL_AJAX_URL.control_hand,
                     data: {
                         id: user_id
                     },
@@ -212,11 +185,7 @@ $(function () {
         this.edit = function () { }
         this.isDisabled = function () { return true; }
         this.setValue = function (val) {
-            var row_id = this.cell.parentNode.idd;     // 获取行id
-            if (val == 'Enable') {
-                this.setCValue('<div class="row-event">' + '<span onclick="userEditPop(' + row_id + ');" title="修改">修改</span>' + '<span onclick="userDel(' + row_id + ');" title="删除">删除</span><span onclick="changeState(' + row_id + ');" title="禁用">禁用</span></div>', val);
-            } else {
-                this.setCValue('<div class="row-event">' + '<span onclick="userEditPop(' + row_id + ');" title="修改">修改</span>' + '<span onclick="userDel(' + row_id + ');" title="删除">删除</span><span onclick="changeState(' + row_id + ');" title="启用">启用</span></div>', val);
-            }
+            var row_id = val;     // 获取行id
+            this.setCValue('<div class="row-event narrow-width">' + '<span onclick="controlEdit(' + row_id + ');" title="修改">修改</span>' + '<span onclick="controlDel(' + row_id + ');" title="删除">删除</span><span onclick="controlHand(' + row_id + ');" title="手动执行">手动执行</span></div>', val);
         }
     }

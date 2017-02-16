@@ -1,12 +1,12 @@
 ﻿var myGrid;
 $(function () {
     myGrid = new dhtmlXGridObject('gridbox');
-    myGrid.setHeader("序号,任务类型,任务运行ID,任务名称,用户,开始时间,结束时间,运行时间,状态,操作")
-    myGrid.setColumnIds(",type,runid,name,user,begingtime,endtime,duration,status,runid");
-    myGrid.setColTypes("cntr,ro,link,ro,ro,ro,ro,ro,ro,button");
-    myGrid.setInitWidths("50,100,100,*,70,155,155,80,80,180");
-    myGrid.setColAlign("center,center,center,center,center,center,center,center,center,center");
-    myGrid.enableTooltips("false,true,true,true,true,true,true,true,true,false");
+    myGrid.setHeader("序号,任务类型,任务运行ID,任务名称,用户,开始时间,结束时间,已运行时间,操作")
+    myGrid.setColumnIds(",type,runid,name,user,begingtime,endtime,duration,runid");
+    myGrid.setColTypes("cntr,ro,link,ro,ro,ro,ro,ro,button");
+    myGrid.setInitWidths("50,100,120,*,100,160,120,100,180");
+    myGrid.setColAlign("center,center,center,center,center,center,center,center,center");
+    myGrid.enableTooltips("false,true,true,true,true,true,true,true,false");
     myGrid.enableResizing("false");
     myGrid.enableKeyboardSupport(false);
     myGrid.enableAutoHeight(true);
@@ -19,16 +19,9 @@ $(function () {
         return false;
     });
     if (GLOBAL_DEBUG) {
-        var data = GLOBAL_JSON.task_history.data.data;
+        var data = GLOBAL_JSON.task_running.data.data;
         myGrid.parse(data, function () {
             myGrid.forEachRow(function (id) {
-                var status_cell = myGrid.cellById(id, 8),
-                    status_value = status_cell.getValue();
-                if (status_value == '1') {
-                    status_cell.setValue('<span style="color:#54c3a5">成功</span>');
-                } else {
-                    status_cell.setValue('<span style="color:#ff576f">失败</span>');
-                }
                 //根据id链接跳转
                 myGrid.cellById(id, 2).setValue(myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^history_chart.html?id=' + myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^_self');
                 //console.log(myGrid.cellById(id, 2).getValue());
@@ -36,18 +29,11 @@ $(function () {
         }, "js");
     } else {
         _ajax({
-            url: GLOBAL_AJAX_URL.task_history,
+            url: GLOBAL_AJAX_URL.task_running,
             success: function (res) {
                 if (res.status) {
                     myGrid.parse(res.data, function () {
                         myGrid.forEachRow(function (id) {
-                            var status_cell = myGrid.cellById(id, 8),
-                                status_value = status_cell.getValue();
-                            if (status_value == '1') {
-                                status_cell.setValue('<span style="color:#54c3a5">成功</span>');
-                            } else {
-                                status_cell.setValue('<span style="color:#ff576f">失败</span>');
-                            }
                             //根据id链接跳转
                             myGrid.cellById(id, 2).setValue(myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^history_chart?id=' + myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^_self');
                             //console.log(myGrid.cellById(id, 2).getValue());
@@ -105,37 +91,7 @@ $(function () {
             }
         }
     }
-    //重新执行
-    function restart(id) {
-        top.creatPop({
-            caption: '提示消息',
-            width: 360,
-            height: 234,
-            title: '您确定要重新执行该任务吗？',
-            url: 'html/common/delpop.html'
-        });
-        top.myPop.callback = function () {
-            if (GLOBAL_DEBUG) {
-                window.location.reload(true);
-            } else {
-                _ajax({
-                    url: GLOBAL_AJAX_URL.task_restart,
-                    data: { id: id },
-                    success: function (res) {
-                        if (res.status) {
-                            window.location.reload(true);
-                        } else {
-                            top.dhtmlx.alert({
-                                text: res.data.msg,
-                                title: '提示信息',
-                                ok: '确定'
-                            });
-                        }
-                    }
-                });
-            }
-        }
-    }
+    
     eXcell_button.prototype = new eXcell;
     function eXcell_button(cell) {
         if (cell) {
@@ -146,6 +102,6 @@ $(function () {
         this.isDisabled = function () { return true; }
         this.setValue = function (val) {
             var row_id = val;     // 获取行id
-            this.setCValue('<div class="row-event narrow-width">' + '<span onclick="window.location.href=\'history_chart.html?id=' + row_id + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + row_id + ');" title="停止">停止</span><span onclick="restart(' + row_id + ');" title="重新执行">重新执行</span></div>', val);
+            this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'history_chart.html?id=' + row_id + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + row_id + ');" title="停止">停止</span></div>', val);
         }
     }
