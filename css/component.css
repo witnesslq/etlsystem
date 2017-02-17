@@ -207,7 +207,7 @@ button.m-button {
 }
 /*系统管理*/
 .grid_form {
-	font-size:16px;
+	font-size:14px;
 	padding:30px 0 20px;
 }
 .grid_form li {
@@ -230,20 +230,20 @@ button.m-button {
 	width:160px;
 	padding-right:15px;
 	text-align:right;
-	line-height:42px;
+	line-height:34px;
 }
 .grid_form li input{
 	width:300px;
 	float:left;
-    height:42px;
+    height:34px;
 }
 .grid_form .input_disable { 
     background: #fff; 
     color:#666;
     width: 300px;
     float: left;
-    height: 42px;
-    line-height:42px;
+    height: 34px;
+    line-height:34px;
 }
 .grid_form .form_tip { 
     float: none; 
