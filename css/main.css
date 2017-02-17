@@ -32,10 +32,10 @@
 .center-body .left-menu > dl.system-manger.active { height: 184px; }
 .center-body .left-menu > dl > dt { position: relative; width: 180px; height: 40px; line-height: 40px; font-size: 14px; padding-left: 50px; cursor: pointer; }
 .center-body .left-menu > dl.index-menu > dt { background: url(../imgs/home_icon.png) 14px 11px no-repeat; }
-.center-body .left-menu > dl.task-manger > dt { background: url(../imgs/usersearch_icon.png) 17px 11px no-repeat; }
-.center-body .left-menu > dl.task-dispatch > dt { background: url(../imgs/usercenter-icon.png) 18px 12px no-repeat; }
-.center-body .left-menu > dl.task-run > dt { background: url(../imgs/systemman_icon.png) 16px 11px no-repeat; }
-.center-body .left-menu > dl.system-manger > dt { background: url(../imgs/searchgo_icon.png) 16px 13px no-repeat; }
+.center-body .left-menu > dl.task-manger > dt { background: url(../imgs/taskmanage_icon.png) 17px 11px no-repeat; }
+.center-body .left-menu > dl.task-dispatch > dt { background: url(../imgs/tasktrans_icon.png) 18px 11px no-repeat; }
+.center-body .left-menu > dl.task-run > dt { background: url(../imgs/taskrunning_icon.png) 16px 11px no-repeat; }
+.center-body .left-menu > dl.system-manger > dt { background: url(../imgs/systemman_icon.png) 16px 11px no-repeat; }
 .center-body .left-menu > dl.selected > dt, .center-body .left-menu > dl.selected > dt:hover { background-color: #077eed; }
 .center-body .left-menu > dl > dt > i { position: absolute; width: 7px; height: 10px; top: 16px; right: 12px; background: url(../imgs/right.png) center center no-repeat; }
 .center-body .left-menu > dl.active > dt > i { width: 9px; height: 6px; top: 18px; right: 12px; background: url(../imgs/down.png) center center no-repeat; }
