@@ -32,7 +32,7 @@ $(function () {
                 } else {
                     myGrid.cellById(id, 1).setValue('转换');
                     //根据id链接跳转
-                    myGrid.cellById(id, 2).setValue(taskid + '^/html/task/history_chart.html?id=' + taskid + '^_self');
+                    myGrid.cellById(id, 2).setValue(taskid + '^../task/history_chart.html?id=' + taskid + '^_self');
                     myGrid.cellById(id, 8).setValue({ type: typeid, rowid: taskid });
                 }
             });  
@@ -55,7 +55,7 @@ $(function () {
                             } else {
                                 myGrid.cellById(id, 1).setValue('转换');
                                 //根据id链接跳转
-                                myGrid.cellById(id, 2).setValue(taskid + '^/html/task/history_chart.html?id=' + taskid + '^_self');
+                                myGrid.cellById(id, 2).setValue(taskid + '^../task/history_chart.html?id=' + taskid + '^_self');
                                 myGrid.cellById(id, 8).setValue({ type: typeid, rowid: taskid });
                             }
                         });
@@ -126,7 +126,7 @@ $(function () {
             if (data.type == '1') {
                 this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span></div>', val);
             } else {
-                this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'/html/task/history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span></div>', val);
+                this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'../task/history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span></div>', val);
             }
         }
     }
