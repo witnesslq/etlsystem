@@ -2,7 +2,7 @@
 $(function () {
     myGrid = new dhtmlXGridObject('gridbox');
     myGrid.setHeader("序号,任务类型,任务运行ID,任务名称,用户,开始时间,结束时间,已运行时间,操作")
-    myGrid.setColumnIds(",type,runid,name,user,begingtime,endtime,duration,runid");
+    myGrid.setColumnIds(",type,runid,name,user,begingtime,endtime,duration,");
     myGrid.setColTypes("cntr,ro,link,ro,ro,ro,ro,ro,button");
     myGrid.setInitWidths("50,100,120,*,100,160,120,100,180");
     myGrid.setColAlign("center,center,center,center,center,center,center,center,center");
@@ -21,11 +21,22 @@ $(function () {
     if (GLOBAL_DEBUG) {
         var data = GLOBAL_JSON.task_running.data.data;
         myGrid.parse(data, function () {
-            myGrid.forEachRow(function (id) {
-                //根据id链接跳转
-                myGrid.cellById(id, 2).setValue(myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^history_chart.html?id=' + myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^_self');
-                //console.log(myGrid.cellById(id, 2).getValue());
-            });            
+            myGrid.forEachRow(function (id) {                
+                var taskid = myGrid.cellById(id, 8).cell.parentNode._attrs.runid,
+                    typeid = myGrid.cellById(id, 8).cell.parentNode._attrs.type;
+                if (typeid == '1') {
+                    myGrid.cellById(id, 1).setValue('作业');
+                    //根据id链接跳转
+                    myGrid.cellById(id, 2).setValue(taskid + '^history_chart.html?id=' + taskid + '^_self');
+                    myGrid.cellById(id, 8).setValue({ type: typeid, rowid: taskid });
+                } else {
+                    myGrid.cellById(id, 1).setValue('转换');
+                    //根据id链接跳转
+                    myGrid.cellById(id, 2).setValue(taskid + '^/html/task/history_chart.html?id=' + taskid + '^_self');
+                    myGrid.cellById(id, 8).setValue({ type: typeid, rowid: taskid });
+                }
+            });  
+            
         }, "js");
     } else {
         _ajax({
@@ -34,9 +45,19 @@ $(function () {
                 if (res.status) {
                     myGrid.parse(res.data, function () {
                         myGrid.forEachRow(function (id) {
-                            //根据id链接跳转
-                            myGrid.cellById(id, 2).setValue(myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^history_chart?id=' + myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^_self');
-                            //console.log(myGrid.cellById(id, 2).getValue());
+                            var taskid = myGrid.cellById(id, 8).cell.parentNode._attrs.runid,
+                                typeid = myGrid.cellById(id, 8).cell.parentNode._attrs.type;
+                            if (typeid == '1') {
+                                myGrid.cellById(id, 1).setValue('作业');
+                                //根据id链接跳转
+                                myGrid.cellById(id, 2).setValue(taskid + '^history_chart.html?id=' + taskid + '^_self');
+                                myGrid.cellById(id, 8).setValue({ type: typeid, rowid: taskid });
+                            } else {
+                                myGrid.cellById(id, 1).setValue('转换');
+                                //根据id链接跳转
+                                myGrid.cellById(id, 2).setValue(taskid + '^/html/task/history_chart.html?id=' + taskid + '^_self');
+                                myGrid.cellById(id, 8).setValue({ type: typeid, rowid: taskid });
+                            }
                         });
                     }, "js");
                 } else {
@@ -101,7 +122,11 @@ $(function () {
         this.edit = function () { }
         this.isDisabled = function () { return true; }
         this.setValue = function (val) {
-            var row_id = val;     // 获取行id
-            this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'history_chart.html?id=' + row_id + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + row_id + ');" title="停止">停止</span></div>', val);
+            var data = val;
+            if (data.type == '1') {
+                this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span></div>', val);
+            } else {
+                this.setCValue('<div class="row-event">' + '<span onclick="window.location.href=\'/html/task/history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span></div>', val);
+            }
         }
     }

@@ -44,6 +44,9 @@
         var url = $(this).attr('hrefurl');
         window.location.href = url + '.html?id=' + taskId;
     });
+    //$('#close_win').on('click', function () {
+    //    window.location.href = 'running.html';
+    //})
     //获取浏览器参数方法
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象

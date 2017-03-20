@@ -23,12 +23,10 @@
                     $name.val(data.name);
                     $tel.val(data.phoneNumber);
                 } else {
-                    top.creatPop({
-                        caption: '提示信息',
-                        width: 360,
-                        height: 234,
-                        title: res.messages,
-                        url: 'commonhtml/infopop.html'
+                    top.dhtmlx.alert({
+                        text: res.messages,
+                        title: '提示信息',
+                        ok: '确定'
                     });
                 }
             }

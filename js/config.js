@@ -14,15 +14,17 @@ var GLOBAL_AJAX_URL = {
     task_stop: '',//任务历史停止操作
     task_restart: '',//任务历史重新执行
     task_chart: '',//任务图表
+    task_step: '',//任务步骤
+    task_situation: '',//执行情况
     task_log:'',//任务日志
-	user_list: '/metallurgy/user/query',//用户管理-用户列表
-	user_add: '/metallurgy/user/addUser',//用户管理-用户添加
-	users_del: '/metallurgy/user/deleteUsers',//用户管理-用户批量删除
-	user_del: '/metallurgy/user/deleteById',//用户管理-单个用户删除
-	user_edit: '/metallurgy/user/updateUser',//用户管理-用户编辑
-	user_status_edit: '/metallurgy/user/updateStatusById',//用户管理-用户状态更改
+	user_list: '',//用户管理-用户列表
+	user_add: '',//用户管理-用户添加
+	users_del: '',//用户管理-用户批量删除
+	user_del: '',//用户管理-单个用户删除
+	user_edit: '',//用户管理-用户编辑
+	user_status_edit: '',//用户管理-用户状态更改
 	user_info: '',//个人信息管理-获取个人详细信息
-	user_info_edit: '/metallurgy/user/updateInfo',//个人信息管理-修改个人信息
+	user_info_edit: '',//个人信息管理-修改个人信息
 };
 //模拟的JSON数据
 var GLOBAL_JSON = {
@@ -116,7 +118,7 @@ var GLOBAL_JSON = {
             "msg": "",
             "data": [
                 {
-                    "type": "作业",
+                    "type": "1",
                     "runid": "5678",
                     "name": "importDataByDay",
                     "user": "admin",
@@ -125,7 +127,7 @@ var GLOBAL_JSON = {
                     "duration": "5m"
                 },
                 {
-                    "type": "作业",
+                    "type": "1",
                     "runid": "5679",
                     "name": "importDataByB2",
                     "user": "admin",
@@ -134,7 +136,7 @@ var GLOBAL_JSON = {
                     "duration": "30s"
                 },
                 {
-                    "type": "转换",
+                    "type": "2",
                     "runid": "5680",
                     "name": "importFileToDB",
                     "user": "User",
@@ -154,7 +156,7 @@ var GLOBAL_JSON = {
             "msg": "",
             "data": [
                 {
-                    "type": "作业",
+                    "type": "1",
                     "runid": "5678",
                     "name": "importDataByDay",
                     "user": "admin",
@@ -164,7 +166,7 @@ var GLOBAL_JSON = {
                     "status": "1"
                 },
                 {
-                    "type": "作业",
+                    "type": "1",
                     "runid": "5679",
                     "name": "importDataByB2",
                     "user": "admin",
@@ -174,7 +176,7 @@ var GLOBAL_JSON = {
                     "status": "1"
                 },
                 {
-                    "type": "转换",
+                    "type": "2",
                     "runid": "5680",
                     "name": "importFileToDB",
                     "user": "User",
@@ -229,6 +231,57 @@ var GLOBAL_JSON = {
                     "endtime": "2016-12-22 12:21:30",
                     "duration": "1m20s"
                 }
+            ]
+        }
+    },
+    //执行情况
+    task_situation: {
+        "status": true,
+        "httpstatus": 200,
+        "error_code": 0,
+        "data": {
+            "msg": "",
+            "data": [
+                {
+                    "stepname": "读取数据库内容",
+                    "line_number": "0",
+                    "read": "100",
+                    "write": "12000",
+                    "entry": "12000",
+                    "export": "12000",
+                    "update": "0",
+                    "refuse": "0",
+                    "error": "0",
+                    "time": "4s",
+                    "speed": "3000"
+                },
+                {
+                    "stepname": "数据格式转换",
+                    "line_number": "0",
+                    "read": "12000",
+                    "write": "12000",
+                    "entry": "0",
+                    "export": "0",
+                    "update": "0",
+                    "refuse": "0",
+                    "error": "0",
+                    "time": "10s",
+                    "speed": "1200"
+                },
+                {
+                    "stepname": "输出文本文件",
+                    "line_number": "0",
+                    "read": "12000",
+                    "write": "12000",
+                    "entry": "0",
+                    "export": "12000",
+                    "update": "0",
+                    "refuse": "0",
+                    "error": "0",
+                    "time": "2s",
+                    "speed": "6000"
+                }
+                
             ]
         }
     },
@@ -306,5 +359,5 @@ var GLOBAL_JSON = {
 	            "password": "1436864169"
 	        }
 	    }
-	},
+	}
 };

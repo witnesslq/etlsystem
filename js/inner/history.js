@@ -29,29 +29,70 @@ $(function () {
                 } else {
                     status_cell.setValue('<span style="color:#ff576f">失败</span>');
                 }
-                //根据id链接跳转
-                myGrid.cellById(id, 2).setValue(myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^history_chart.html?id=' + myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^_self');
-                //console.log(myGrid.cellById(id, 2).getValue());
+                
+                var taskid = status_cell.cell.parentNode._attrs.runid,
+                    typeid = status_cell.cell.parentNode._attrs.type;
+                if (typeid == '1') {
+                    myGrid.cellById(id, 1).setValue('作业');
+                    myGrid.cellById(id, 9).setValue({ type: typeid, rowid: taskid });
+                    //根据id链接跳转
+                    myGrid.cellById(id, 2).setValue(taskid + '^history_chart.html?id=' + taskid + '^_self');
+                } else {
+                    myGrid.cellById(id, 1).setValue('转换');
+                    myGrid.cellById(id, 9).setValue({ type: typeid, rowid: taskid });
+                    //根据id链接跳转
+                    myGrid.cellById(id, 2).setValue(taskid + '^/html/task/history_chart.html?id=' + taskid + '^_self');
+                }
             });            
         }, "js");
     } else {
+        ajaxDatatable()
+    }
+    //按钮事件
+    $('#btn_search').on('click', function () {
+        var data = {};
+            data.name = $('#taskName').val(),
+            data.user = $('#taskUser').val(),
+            data.type = $('#taskType').val();
+        //ajax加载数据，函数
+        window.location.reload(true);
+        ajaxDatatable(data)
+    });
+})
+    //加载数据
+    function ajaxDatatable(param) {
+        var param = param || '';
         _ajax({
             url: GLOBAL_AJAX_URL.task_history,
+            data: {
+                name: param.name,
+                user: param.user,
+                type: param.type
+            },
             success: function (res) {
                 if (res.status) {
                     myGrid.parse(res.data, function () {
-                        myGrid.forEachRow(function (id) {
-                            var status_cell = myGrid.cellById(id, 8),
-                                status_value = status_cell.getValue();
-                            if (status_value == '1') {
-                                status_cell.setValue('<span style="color:#54c3a5">成功</span>');
-                            } else {
-                                status_cell.setValue('<span style="color:#ff576f">失败</span>');
-                            }
+                        var status_cell = myGrid.cellById(id, 8),
+                        status_value = status_cell.getValue();
+                        if (status_value == '1') {
+                            status_cell.setValue('<span style="color:#54c3a5">成功</span>');
+                        } else {
+                            status_cell.setValue('<span style="color:#ff576f">失败</span>');
+                        }
+
+                        var taskid = status_cell.cell.parentNode._attrs.runid,
+                            typeid = status_cell.cell.parentNode._attrs.type;
+                        if (typeid == '1') {
+                            myGrid.cellById(id, 1).setValue('作业');
+                            myGrid.cellById(id, 9).setValue({ type: typeid, rowid: taskid });
                             //根据id链接跳转
-                            myGrid.cellById(id, 2).setValue(myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^history_chart?id=' + myGrid.cellById(id, 8).cell.parentNode._attrs.runid + '^_self');
-                            //console.log(myGrid.cellById(id, 2).getValue());
-                        });
+                            myGrid.cellById(id, 2).setValue(taskid + '^history_chart.html?id=' + taskid + '^_self');
+                        } else {
+                            myGrid.cellById(id, 1).setValue('转换');
+                            myGrid.cellById(id, 9).setValue({ type: typeid, rowid: taskid });
+                            //根据id链接跳转
+                            myGrid.cellById(id, 2).setValue(taskid + '^/html/task/history_chart.html?id=' + taskid + '^_self');
+                        }
                     }, "js");
                 } else {
                     top.dhtmlx.alert({
@@ -63,17 +104,6 @@ $(function () {
             }
         });
     }
-    //按钮事件
-    $('#btn_search').on('click', function () {
-        var data = {};
-            data.name = $('#taskName').val(),
-            data.user = $('#taskUser').val(),
-            data.type = $('#taskType').val();
-        //ajax加载数据，函数
-        window.location.reload(true);
-    });
-})
-    
     //停止任务
     function stopWork(id) {
         top.creatPop({
@@ -145,7 +175,11 @@ $(function () {
         this.edit = function () { }
         this.isDisabled = function () { return true; }
         this.setValue = function (val) {
-            var row_id = val;     // 获取行id
-            this.setCValue('<div class="row-event narrow-width">' + '<span onclick="window.location.href=\'history_chart.html?id=' + row_id + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + row_id + ');" title="停止">停止</span><span onclick="restart(' + row_id + ');" title="重新执行">重新执行</span></div>', val);
+            var data = val;
+            if (data.type == '1') {
+                this.setCValue('<div class="row-event narrow-width">' + '<span onclick="window.location.href=\'history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span><span onclick="restart(' + data.rowid + ');" title="重新执行">重新执行</span></div>', val);
+            } else {
+                this.setCValue('<div class="row-event narrow-width">' + '<span onclick="window.location.href=\'/html/task/history_chart.html?id=' + data.rowid + '\';" title="任务详情">任务详情</span>' + '<span onclick="stopWork(' + data.rowid + ');" title="停止">停止</span><span onclick="restart(' + data.rowid + ');" title="重新执行">重新执行</span></div>', val);
+            }
         }
     }
