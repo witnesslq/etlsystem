@@ -1,5 +1,6 @@
 ﻿var myGrid;
 $(function () {
+    var taskIds = getUrlParam('id');
     myGrid = new dhtmlXGridObject('gridbox');
     myGrid.setHeader("序号,步骤名称,复制的记录行数,读,写,输入,输出,更新,拒绝,错误,时间,速度（条记录/秒）")
     myGrid.setColumnIds(",stepname,line_number,read,write,entry,export,update,refuse,error,time,speed");
@@ -37,44 +38,25 @@ $(function () {
             }
         });
     }
-    //按钮事件
-    $('#btn_search').on('click', function () {
-        var data = {};
-            data.name = $('#taskName').val(),
-            data.user = $('#taskUser').val();
-        //ajax加载数据，函数
-        window.location.reload(true);
+    //页面跳转
+    $('.vice_nav>.vice_name').on('click', function () {
+        var url = $(this).attr('hrefurl');
+        window.location.href = url + '.html?id=' + taskIds;
     });
+    //$('#close_win').on('click', function () {
+    //    window.location.href = 'running.html';
+    //})
+    //获取浏览器参数方法
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
 })
-    
-    //删除任务
-    function taskDel(id) {
-        top.creatPop({
-            caption: '删除用户',
-            width: 360,
-            height: 234,
-            title: '您确定要删除该任务吗？删除后将无法找回',
-            url: 'html/common/delpop.html'
-        });
-        top.myPop.callback = function () {
-            if (GLOBAL_DEBUG) {
-                window.location.reload(true);
-            } else {
-                _ajax({
-                    url: GLOBAL_AJAX_URL.taskDel,
-                    data: { id: id },
-                    success: function (res) {
-                        if (res.status) {
-                            window.location.reload(true);
-                        } else {
-                            top.dhtmlx.alert({
-                                text: res.data.msg,
-                                title: '提示信息',
-                                ok: '确定'
-                            });
-                        }
-                    }
-                });
-            }
-        }
+
+    //获取浏览器参数方法
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
     }
