@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     //------------------ETL管理工具中心开始------------------
     //初始化页面布局
     dhtmlx_myLayout = new dhtmlXLayoutObject({
@@ -27,7 +27,7 @@
             }
         ]
     });
-    //设置布局间隙为0
+    //设置布局间隙为 0
     dhtmlx_myLayout.setSeparatorSize(0, 0);
     dhtmlx_myLayout.setSeparatorSize(1, 0);
     dhtmlx_myLayout.setSeparatorSize(2, 0);
